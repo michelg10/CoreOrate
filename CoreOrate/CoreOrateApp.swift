@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 @main
 struct CoreOrateApp: App {
     var body: some Scene {

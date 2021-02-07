@@ -23,36 +23,50 @@ class AudioRecorder: ObservableObject {
     let coefsNum:Int
     
     //MARK: Audio buffer stuff
-    var audioBuffer:[Float]
-    var curEndOfBuf=0
+    var audioBufs:[UnsafeMutablePointer<Float>?]
+    var arcAid:[AVAudioPCMBuffer?]
+    var curBufStart=0
+    var curBufSize=0
+    var bufSize:Int
     
     var curActive=0
     var numJobs=0
     
-    var fftSetup:vDSP.FFT<DSPSplitComplex>
+    var fftSetup:FFTSetup
     
+    //MARK: Generate this
+    var frame:UnsafeMutablePointer<Float>
+    var hammingWindow:UnsafeMutablePointer<Float>
+    var scale:Float
+    @Published var outSpec:Image?=nil
+    @Published var alive:Int = -1
+        
     init() {
+        
         dftWindowSample=Int(dftWindow*Double(sampleRate))
         interpolationSample=next2Pow(x:4*dftWindowSample) //interpolate!
         frameIncSample=Int(frameInc*Double(sampleRate))
         strideSample=Int(Double(sampleRate)*strideLen)
         chunkSample=Int(chunkLen*Double(sampleRate))
-        audioBuffer=Array(repeating: 0.0, count: chunkSample)
+        bufSize=Int(ceil(Double(chunkSample)/Double(strideSample)))
+        audioBufs=Array(repeating: UnsafeMutablePointer<Float>(nil), count: bufSize)
+        arcAid=Array(repeating: nil, count: bufSize)
+        
         coefsNum=Int(floor(Double(interpolationSample)/2.0))
         
         let log2n=vDSP_Length(log2(Float(interpolationSample)))
         
-        fftSetup=vDSP.FFT(log2n: log2n, radix:.radix2, ofType: DSPSplitComplex.self)!
+        fftSetup=vDSP_create_fftsetup(log2n,FFTRadix(kFFTRadix2))!
         
+        scale=0
+        
+        frame=UnsafeMutablePointer<Float>.allocate(capacity: interpolationSample)
+        frame.initialize(to: 0)
+        hammingWindow=UnsafeMutablePointer<Float>.allocate(capacity: dftWindowSample)
+        hammingWindow.initialize(to: 0)
+        doInit(dftWindowSample,sampleRate,hammingWindow,&scale)
     }
-    
-    let objectWillChange=PassthroughSubject<AudioRecorder,Never>() // notify observing views about changes
-    
-    var recording = false {
-        didSet {
-            objectWillChange.send(self)
-        }
-    }
+        
     var audioEngine:AVAudioEngine=AVAudioEngine()
     func startRecording() {
         audioEngine=AVAudioEngine()
@@ -64,10 +78,10 @@ class AudioRecorder: ObservableObject {
         let converter=AVAudioConverter(from:inputFormat,to:outputFormat)!
         
         inputNode.installTap(onBus: 0, bufferSize: AVAudioFrameCount(Double(sampleRate)*strideLen), format: inputFormat) { [self] buffer,time in
+            let perfStart = DispatchTime.now()
             self.numJobs+=1
             let myNum=self.numJobs
             self.curActive=self.numJobs
-            let perfStart = DispatchTime.now()
             var newBufferAvailable=true
             
             let inputCallback: AVAudioConverterInputBlock={inNumPackets,outStatus in
@@ -81,9 +95,6 @@ class AudioRecorder: ObservableObject {
                     return nil
                 }
             }
-            let perfConv = DispatchTime.now()
-            //print("Conversion Time \(Double(perfConv.uptimeNanoseconds-perfStart.uptimeNanoseconds)/1000000.0) ms")
-            var internalAudBuf:[Float]=[]
             if let convertedBuffer = AVAudioPCMBuffer(pcmFormat: outputFormat, frameCapacity: AVAudioFrameCount(outputFormat.sampleRate) * buffer.frameLength / AVAudioFrameCount(buffer.format.sampleRate)){
                 var error: NSError?
                 let status = converter.convert(to: convertedBuffer, error: &error, withInputFrom: inputCallback)
@@ -91,37 +102,30 @@ class AudioRecorder: ObservableObject {
                 if (convertedBuffer.frameLength != self.strideSample) {
                     print("Abnormal frame length \(convertedBuffer.frameLength)")
                 }
-                if (self.curEndOfBuf+self.strideSample>=self.chunkSample) {
-                    let shiftBy=self.curEndOfBuf+self.strideSample-self.chunkSample
-                    self.curEndOfBuf=self.chunkSample
-                    //print("Moving \(shiftBy)..<\(self.chunkSample) to 0..<\(self.chunkSample-shiftBy)")
-                    internalAudBuf=self.audioBuffer
-                    internalAudBuf[0..<self.chunkSample-shiftBy]=internalAudBuf[shiftBy..<self.chunkSample]
-                    
-                    //print("Copying \(self.strideSample) samples to \(self.chunkSample-self.strideSample)..<\(self.chunkSample)")
-                    for i in 0..<self.strideSample {
-                        internalAudBuf[self.chunkSample-self.strideSample+i]=convertedBuffer.floatChannelData![0][i]
-                    }
-                    self.curEndOfBuf=self.chunkSample
-                    self.audioBuffer=internalAudBuf
-                } else {
-                    //print("Copying \(self.strideSample) samples to \(self.curEndOfBuf)..<\(self.curEndOfBuf+self.strideSample)")
-                    internalAudBuf=self.audioBuffer
-                    for i in 0..<self.strideSample {
-                        internalAudBuf[i+self.curEndOfBuf]=convertedBuffer.floatChannelData![0][i]
-                    }
-                    self.curEndOfBuf+=self.strideSample
-                    self.audioBuffer=internalAudBuf
-                }
+                let daBuffer=convertedBuffer.floatChannelData![0]
+                audioBufs[curBufStart]=daBuffer
+                arcAid[curBufStart]=convertedBuffer
+                curBufStart=(curBufStart+1)%bufSize
+                curBufSize=min(curBufSize+1,bufSize)
             }
-            let perfCopy = DispatchTime.now()
-            print("Buffer load time \(Double(perfCopy.uptimeNanoseconds-perfStart.uptimeNanoseconds)/1000000.0) ms")
             
-            if (self.curEndOfBuf==self.chunkSample) {
-                //run analysis
-                doAudioAnalysis(dftWindowSample: dftWindowSample, frameIncSample: frameIncSample, interpolationSample: interpolationSample, coefsNum: coefsNum, fftSetup: fftSetup, signal: internalAudBuf)
-                let perfAnal = DispatchTime.now()
-                print("Transform time \(Double(perfAnal.uptimeNanoseconds-perfCopy.uptimeNanoseconds)/1000000.0) ms")
+            if (curBufSize==bufSize) {
+                var img:UnsafeMutablePointer<UInt8>
+                let audioBufPtr:UnsafeMutablePointer<UnsafeMutablePointer<Float>?>=UnsafeMutablePointer(mutating:audioBufs)
+                img=specGen(curBufStart,bufSize,strideSample,audioBufPtr,dftWindowSample,frameIncSample,coefsNum,chunkSample, interpolationSample,frame,hammingWindow, fftSetup, scale, resizeX,resizeY, -144, -60)
+
+                let colorspace = CGColorSpaceCreateDeviceRGB();
+                let rgbData = CFDataCreate(nil, img, 256 * 256 * 3);
+                let provider = CGDataProvider(data: rgbData!);
+                let cgimg=CGImage(width: 256, height: 256, bitsPerComponent: 8, bitsPerPixel: 24, bytesPerRow: 256*3, space: colorspace, bitmapInfo: CGBitmapInfo(rawValue: 0), provider: provider!, decode: nil, shouldInterpolate:false, intent: CGColorRenderingIntent.defaultIntent)
+                img.deallocate()
+                DispatchQueue.main.async {
+                    outSpec=Image(uiImage: UIImage(cgImage: cgimg!))
+                    alive=alive+1
+                }
+                let perfEnd = DispatchTime.now()
+                print("Epoch completed in \(Double(perfEnd.uptimeNanoseconds-perfStart.uptimeNanoseconds)/1000000.0) ms")
+                //Perform inference
             }
             
             if self.curActive != myNum {

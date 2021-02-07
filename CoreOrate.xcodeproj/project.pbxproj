@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		F02CF47B25CEE38F003A53FF /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02CF47A25CEE38F003A53FF /* utils.swift */; };
-		F02CF48125CEFC02003A53FF /* specgen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02CF48025CEFC02003A53FF /* specgen.swift */; };
 		F02CF48825CF7F07003A53FF /* lltfunc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F02CF48625CF7F07003A53FF /* lltfunc.cpp */; };
+		F02CF49325CFC61A003A53FF /* jet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F02CF49225CFC61A003A53FF /* jet.cpp */; };
+		F02CF4B225D01917003A53FF /* smmodel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F02CF4B125D01916003A53FF /* smmodel.mlmodel */; };
 		F0B9554D25CE2ED8008ECEE9 /* CoreOrateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9554C25CE2ED8008ECEE9 /* CoreOrateApp.swift */; };
 		F0B9554F25CE2ED8008ECEE9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9554E25CE2ED8008ECEE9 /* ContentView.swift */; };
 		F0B9555125CE2EDB008ECEE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0B9555025CE2EDB008ECEE9 /* Assets.xcassets */; };
@@ -38,10 +39,11 @@
 
 /* Begin PBXFileReference section */
 		F02CF47A25CEE38F003A53FF /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
-		F02CF48025CEFC02003A53FF /* specgen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = specgen.swift; sourceTree = "<group>"; };
 		F02CF48525CF7F07003A53FF /* CoreOrate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreOrate-Bridging-Header.h"; sourceTree = "<group>"; };
 		F02CF48625CF7F07003A53FF /* lltfunc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lltfunc.cpp; sourceTree = "<group>"; };
 		F02CF48725CF7F07003A53FF /* lltfunc.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = lltfunc.hpp; sourceTree = "<group>"; };
+		F02CF49225CFC61A003A53FF /* jet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jet.cpp; sourceTree = "<group>"; };
+		F02CF4B125D01916003A53FF /* smmodel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = smmodel.mlmodel; sourceTree = "<group>"; };
 		F0B9554925CE2ED8008ECEE9 /* CoreOrate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreOrate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0B9554C25CE2ED8008ECEE9 /* CoreOrateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreOrateApp.swift; sourceTree = "<group>"; };
 		F0B9554E25CE2ED8008ECEE9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -107,12 +109,13 @@
 			isa = PBXGroup;
 			children = (
 				F0B955FC25CE5686008ECEE9 /* CoreOrate.entitlements */,
+				F02CF4B125D01916003A53FF /* smmodel.mlmodel */,
 				F0B9554C25CE2ED8008ECEE9 /* CoreOrateApp.swift */,
 				F0B9554E25CE2ED8008ECEE9 /* ContentView.swift */,
 				F0B9559F25CE3765008ECEE9 /* AudioRecorder.swift */,
 				F02CF48625CF7F07003A53FF /* lltfunc.cpp */,
+				F02CF49225CFC61A003A53FF /* jet.cpp */,
 				F02CF48725CF7F07003A53FF /* lltfunc.hpp */,
-				F02CF48025CEFC02003A53FF /* specgen.swift */,
 				F02CF47A25CEE38F003A53FF /* utils.swift */,
 				F0B9555025CE2EDB008ECEE9 /* Assets.xcassets */,
 				F0B9555525CE2EDB008ECEE9 /* Info.plist */,
@@ -278,11 +281,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F02CF4B225D01917003A53FF /* smmodel.mlmodel in Sources */,
 				F02CF48825CF7F07003A53FF /* lltfunc.cpp in Sources */,
 				F0B9554F25CE2ED8008ECEE9 /* ContentView.swift in Sources */,
-				F02CF48125CEFC02003A53FF /* specgen.swift in Sources */,
 				F0B955A025CE3765008ECEE9 /* AudioRecorder.swift in Sources */,
 				F0B9554D25CE2ED8008ECEE9 /* CoreOrateApp.swift in Sources */,
+				F02CF49325CFC61A003A53FF /* jet.cpp in Sources */,
 				F02CF47B25CEE38F003A53FF /* utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

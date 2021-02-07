@@ -9,15 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @ObservedObject var audioRecorder: AudioRecorder
+    @ObservedObject var audioRecorder:AudioRecorder
     
     var body: some View {
-//        NavigationView {
-//        }
         VStack(alignment: .leading) {
-            Text("SER").font(.title)
+            Text("CoreOrate").font(.title)
             Text("Model input (Spectrogram)")
+            if audioRecorder.outSpec != nil {
+                audioRecorder.outSpec
+            }
             Text("Model output")
+            if (audioRecorder.alive==69) {
+                Text("Oop")
+            }
+            Text("System epoch \(audioRecorder.alive)")
+            
             Button("Start", action:{audioRecorder.startRecording()})
         }
     }
@@ -25,6 +31,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
+        var img:Image?=Image("circle.fill")
         ContentView(audioRecorder: AudioRecorder())
             .previewDevice("iPhone 12")
     }
