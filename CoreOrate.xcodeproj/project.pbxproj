@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F02CF47B25CEE38F003A53FF /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02CF47A25CEE38F003A53FF /* utils.swift */; };
+		F02CF48125CEFC02003A53FF /* specgen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02CF48025CEFC02003A53FF /* specgen.swift */; };
+		F02CF48825CF7F07003A53FF /* lltfunc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F02CF48625CF7F07003A53FF /* lltfunc.cpp */; };
 		F0B9554D25CE2ED8008ECEE9 /* CoreOrateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9554C25CE2ED8008ECEE9 /* CoreOrateApp.swift */; };
 		F0B9554F25CE2ED8008ECEE9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9554E25CE2ED8008ECEE9 /* ContentView.swift */; };
 		F0B9555125CE2EDB008ECEE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0B9555025CE2EDB008ECEE9 /* Assets.xcassets */; };
@@ -34,6 +37,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F02CF47A25CEE38F003A53FF /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
+		F02CF48025CEFC02003A53FF /* specgen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = specgen.swift; sourceTree = "<group>"; };
+		F02CF48525CF7F07003A53FF /* CoreOrate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreOrate-Bridging-Header.h"; sourceTree = "<group>"; };
+		F02CF48625CF7F07003A53FF /* lltfunc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lltfunc.cpp; sourceTree = "<group>"; };
+		F02CF48725CF7F07003A53FF /* lltfunc.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = lltfunc.hpp; sourceTree = "<group>"; };
 		F0B9554925CE2ED8008ECEE9 /* CoreOrate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreOrate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0B9554C25CE2ED8008ECEE9 /* CoreOrateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreOrateApp.swift; sourceTree = "<group>"; };
 		F0B9554E25CE2ED8008ECEE9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -102,9 +110,14 @@
 				F0B9554C25CE2ED8008ECEE9 /* CoreOrateApp.swift */,
 				F0B9554E25CE2ED8008ECEE9 /* ContentView.swift */,
 				F0B9559F25CE3765008ECEE9 /* AudioRecorder.swift */,
+				F02CF48625CF7F07003A53FF /* lltfunc.cpp */,
+				F02CF48725CF7F07003A53FF /* lltfunc.hpp */,
+				F02CF48025CEFC02003A53FF /* specgen.swift */,
+				F02CF47A25CEE38F003A53FF /* utils.swift */,
 				F0B9555025CE2EDB008ECEE9 /* Assets.xcassets */,
 				F0B9555525CE2EDB008ECEE9 /* Info.plist */,
 				F0B9555225CE2EDB008ECEE9 /* Preview Content */,
+				F02CF48525CF7F07003A53FF /* CoreOrate-Bridging-Header.h */,
 			);
 			path = CoreOrate;
 			sourceTree = "<group>";
@@ -202,6 +215,7 @@
 				TargetAttributes = {
 					F0B9554825CE2ED8008ECEE9 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 					};
 					F0B9555925CE2EDB008ECEE9 = {
 						CreatedOnToolsVersion = 12.4;
@@ -264,9 +278,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F02CF48825CF7F07003A53FF /* lltfunc.cpp in Sources */,
 				F0B9554F25CE2ED8008ECEE9 /* ContentView.swift in Sources */,
+				F02CF48125CEFC02003A53FF /* specgen.swift in Sources */,
 				F0B955A025CE3765008ECEE9 /* AudioRecorder.swift in Sources */,
 				F0B9554D25CE2ED8008ECEE9 /* CoreOrateApp.swift in Sources */,
+				F02CF47B25CEE38F003A53FF /* utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,11 +440,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CoreOrate/CoreOrate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"CoreOrate/Preview Content\"";
 				DEVELOPMENT_TEAM = 9K2XM38XLK;
 				ENABLE_PREVIEWS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				INFOPLIST_FILE = CoreOrate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -437,6 +456,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.legitmichel777.CoreOrate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "CoreOrate/CoreOrate-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -447,6 +467,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CoreOrate/CoreOrate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"CoreOrate/Preview Content\"";
@@ -461,6 +482,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.legitmichel777.CoreOrate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "CoreOrate/CoreOrate-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
