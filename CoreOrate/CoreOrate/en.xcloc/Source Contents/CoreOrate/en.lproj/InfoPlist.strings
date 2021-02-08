@@ -1,0 +1,4 @@
+/* Bundle name */
+"CFBundleName" = "CoreOrate";
+/* Privacy - Microphone Usage Description */
+"NSMicrophoneUsageDescription" = "CoreOrate needs access to your microphone for SER";

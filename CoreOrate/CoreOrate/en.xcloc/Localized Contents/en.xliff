@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="CoreOrate/en.lproj/InfoPlist.strings" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.4" build-num="12D4e"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>CoreOrate</source>
+        <target>CoreOrate</target>
+        <note>Bundle name</note>
+      </trans-unit>
+      <trans-unit id="NSMicrophoneUsageDescription" xml:space="preserve">
+        <source>CoreOrate needs access to your microphone for SER</source>
+        <target>CoreOrate needs access to your microphone for SER</target>
+        <note>Privacy - Microphone Usage Description</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="CoreOrate/en.lproj/Localizable.strings" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.4" build-num="12D4e"/>
+    </header>
+    <body>
+      <trans-unit id="%" xml:space="preserve">
+        <source>%</source>
+        <target>%</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="About CoreOrate" xml:space="preserve">
+        <source>About CoreOrate</source>
+        <target>About CoreOrate</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Buffering..." xml:space="preserve">
+        <source>Buffering...</source>
+        <target>Buffering...</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Classification" xml:space="preserve">
+        <source>Classification</source>
+        <target>Classification</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="CoreOrate runs the emotion recognition system at the core of Orate live on your device. Note that this is by no means a finished product — CoreOrate is meant to be a tech demo and proof of concept only." xml:space="preserve">
+        <source>CoreOrate runs the emotion recognition system at the core of Orate live on your device. Note that this is by no means a finished product — CoreOrate is meant to be a tech demo and proof of concept only.</source>
+        <target>CoreOrate runs the emotion recognition system at the core of Orate live on your device. Note that this is by no means a finished product — CoreOrate is meant to be a tech demo and proof of concept only.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Press start" xml:space="preserve">
+        <source>Press start</source>
+        <target>Press start</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Preview" xml:space="preserve">
+        <source>Preview</source>
+        <target>Preview</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Session Inactive" xml:space="preserve">
+        <source>Session Inactive</source>
+        <target>Session Inactive</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This should only take a moment" xml:space="preserve">
+        <source>This should only take a moment</source>
+        <target>This should only take a moment</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

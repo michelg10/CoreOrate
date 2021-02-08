@@ -45,50 +45,69 @@ class AnalysisEngine: ObservableObject {
     @Published var recordingActive=false
     @Published var outSpec:Image?=nil
     @Published var alive:Int = -1
-    @Published var classificationReturn=""
+    @Published var classificationError:String?=nil
+    @Published var classif:[classification]?=nil
         
     lazy var classificationRequest: VNCoreMLRequest = {
-        do {
-            /*
-             Use the Swift class `MobileNet` Core ML generates from the model.
-             To use a different Core ML classifier model, add it to the project
-             and replace `MobileNet` with that model's generated Swift class.
-             */
-            
-            let request = VNCoreMLRequest(model: mlmodel, completionHandler: { [weak self] request, error in
-                self?.processClassifications(for: request, error: error)
-            })
-            request.imageCropAndScaleOption = .centerCrop
-            return request
-        } catch {
-            fatalError("Failed to load Vision ML model: \(error)")
-        }
+        /*
+         Use the Swift class `MobileNet` Core ML generates from the model.
+         To use a different Core ML classifier model, add it to the project
+         and replace `MobileNet` with that model's generated Swift class.
+         */
+        
+        let request = VNCoreMLRequest(model: mlmodel, completionHandler: { [weak self] request, error in
+            self?.processClassifications(for: request, error: error)
+        })
+        request.imageCropAndScaleOption = .centerCrop
+        return request
     }()
+    
+    struct classification:Identifiable {
+        var id=UUID()
+        var name:String
+        var resID:String
+        var confidence:Double
+    }
     
     func processClassifications(for request: VNRequest, error: Error?) {
         DispatchQueue.main.async {
             guard let results = request.results else {
-                self.classificationReturn = "Unable to classify image."
+                self.classificationError = NSLocalizedString("Unable to classify image.",comment: "Error")
                 return
             }
             // The `results` will always be `VNClassificationObservation`s, as specified by the Core ML model in this project.
             let classifications = results as! [VNClassificationObservation]
         
             if classifications.isEmpty {
-                self.classificationReturn = "Nothing recognized."
+                self.classificationError = NSLocalizedString("Nothing recognized.",comment: "Error")
             } else {
-                // Display top classifications ranked by confidence in the UI.
-                let topClassifications = classifications.prefix(2)
-                let descriptions = topClassifications.map { classification in
-                    // Formats the classification for display; e.g. "(0.37) cliff, drop, drop-off".
-                   return String(format: "  (%.2f) %@", classification.confidence, classification.identifier)
+                self.classificationError = nil
+                let topClassifications = classifications.prefix(4)
+                self.classif = topClassifications.map { eachclassification in
+                    return classification(name: NSLocalizedString(eachclassification.identifier,comment: ""),resID: eachclassification.identifier,confidence: Double(eachclassification.confidence))
                 }
-                self.classificationReturn = "Classification:\n" + descriptions.joined(separator: "\n")
             }
         }
     }
     
-    init() {
+    init(isPreview:Bool) {
+        if (isPreview) {
+            dftWindowSample=0
+            interpolationSample=0
+            frameIncSample=0
+            strideSample=0
+            chunkSample=0
+            coefsNum=0
+            bufSize=1
+            audioBufs=Array(repeating: UnsafeMutablePointer<Float>(nil), count: bufSize)
+            arcAid=Array(repeating: nil, count: bufSize)
+            fftSetup=vDSP_create_fftsetup(1,FFTRadix(kFFTRadix2))!
+            try! mlmodel=VNCoreMLModel(for: smmodel().model)
+            frame=UnsafeMutablePointer<Float>.allocate(capacity: 1)
+            hammingWindow=UnsafeMutablePointer<Float>.allocate(capacity: 1)
+            scale=0
+            return
+        }
         try! mlmodel=VNCoreMLModel(for: smmodel().model)
         
         dftWindowSample=Int(dftWindow*Double(sampleRate))
@@ -203,6 +222,9 @@ class AnalysisEngine: ObservableObject {
         recordingActive=false
     }
     func startRecording() {
+        DispatchQueue.main.async {
+            self.alive = -1
+        }
         curBufStart=0
         curBufSize=0
         audioEngine.prepare()

@@ -10,7 +10,6 @@
 		F02CF47B25CEE38F003A53FF /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02CF47A25CEE38F003A53FF /* utils.swift */; };
 		F02CF48825CF7F07003A53FF /* lltfunc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F02CF48625CF7F07003A53FF /* lltfunc.cpp */; };
 		F02CF49325CFC61A003A53FF /* jet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F02CF49225CFC61A003A53FF /* jet.cpp */; };
-		F02CF4B225D01917003A53FF /* smmodel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F02CF4B125D01916003A53FF /* smmodel.mlmodel */; };
 		F0B9554D25CE2ED8008ECEE9 /* CoreOrateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9554C25CE2ED8008ECEE9 /* CoreOrateApp.swift */; };
 		F0B9554F25CE2ED8008ECEE9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9554E25CE2ED8008ECEE9 /* ContentView.swift */; };
 		F0B9555125CE2EDB008ECEE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0B9555025CE2EDB008ECEE9 /* Assets.xcassets */; };
@@ -18,6 +17,13 @@
 		F0B9555F25CE2EDB008ECEE9 /* CoreOrateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9555E25CE2EDB008ECEE9 /* CoreOrateTests.swift */; };
 		F0B9556A25CE2EDB008ECEE9 /* CoreOrateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9556925CE2EDB008ECEE9 /* CoreOrateUITests.swift */; };
 		F0B955A025CE3765008ECEE9 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9559F25CE3765008ECEE9 /* AudioRecorder.swift */; };
+		F0CEB8A425D1130100B2F27A /* spectrogramPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CEB8A325D1130100B2F27A /* spectrogramPreview.swift */; };
+		F0CEB8A925D1143900B2F27A /* classificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CEB8A825D1143900B2F27A /* classificationView.swift */; };
+		F0CEB8AE25D11E3E00B2F27A /* clickButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CEB8AD25D11E3E00B2F27A /* clickButton.swift */; };
+		F0CEB8B325D12C8600B2F27A /* InactiveSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CEB8B225D12C8600B2F27A /* InactiveSession.swift */; };
+		F0CEB8B825D1301F00B2F27A /* BufferingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CEB8B725D1301F00B2F27A /* BufferingView.swift */; };
+		F0CEB8D125D13F1900B2F27A /* smmodel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F0CEB8D025D13F1900B2F27A /* smmodel.mlmodel */; };
+		F0CEB8DA25D141E600B2F27A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F0CEB8DC25D141E600B2F27A /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +49,6 @@
 		F02CF48625CF7F07003A53FF /* lltfunc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lltfunc.cpp; sourceTree = "<group>"; };
 		F02CF48725CF7F07003A53FF /* lltfunc.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = lltfunc.hpp; sourceTree = "<group>"; };
 		F02CF49225CFC61A003A53FF /* jet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jet.cpp; sourceTree = "<group>"; };
-		F02CF4B125D01916003A53FF /* smmodel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = smmodel.mlmodel; sourceTree = "<group>"; };
 		F0B9554925CE2ED8008ECEE9 /* CoreOrate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreOrate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0B9554C25CE2ED8008ECEE9 /* CoreOrateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreOrateApp.swift; sourceTree = "<group>"; };
 		F0B9554E25CE2ED8008ECEE9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,6 +63,14 @@
 		F0B9556B25CE2EDB008ECEE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F0B9559F25CE3765008ECEE9 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		F0B955FC25CE5686008ECEE9 /* CoreOrate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoreOrate.entitlements; sourceTree = "<group>"; };
+		F0CEB8A325D1130100B2F27A /* spectrogramPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spectrogramPreview.swift; sourceTree = "<group>"; };
+		F0CEB8A825D1143900B2F27A /* classificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = classificationView.swift; sourceTree = "<group>"; };
+		F0CEB8AD25D11E3E00B2F27A /* clickButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clickButton.swift; sourceTree = "<group>"; };
+		F0CEB8B225D12C8600B2F27A /* InactiveSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InactiveSession.swift; sourceTree = "<group>"; };
+		F0CEB8B725D1301F00B2F27A /* BufferingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferingView.swift; sourceTree = "<group>"; };
+		F0CEB8D025D13F1900B2F27A /* smmodel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = smmodel.mlmodel; sourceTree = "<group>"; };
+		F0CEB8DB25D141E600B2F27A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F0CEB8E025D141ED00B2F27A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,9 +122,15 @@
 			isa = PBXGroup;
 			children = (
 				F0B955FC25CE5686008ECEE9 /* CoreOrate.entitlements */,
-				F02CF4B125D01916003A53FF /* smmodel.mlmodel */,
+				F0CEB8D025D13F1900B2F27A /* smmodel.mlmodel */,
 				F0B9554C25CE2ED8008ECEE9 /* CoreOrateApp.swift */,
 				F0B9554E25CE2ED8008ECEE9 /* ContentView.swift */,
+				F0CEB8DC25D141E600B2F27A /* Localizable.strings */,
+				F0CEB8B725D1301F00B2F27A /* BufferingView.swift */,
+				F0CEB8B225D12C8600B2F27A /* InactiveSession.swift */,
+				F0CEB8AD25D11E3E00B2F27A /* clickButton.swift */,
+				F0CEB8A825D1143900B2F27A /* classificationView.swift */,
+				F0CEB8A325D1130100B2F27A /* spectrogramPreview.swift */,
 				F0B9559F25CE3765008ECEE9 /* AudioRecorder.swift */,
 				F02CF48625CF7F07003A53FF /* lltfunc.cpp */,
 				F02CF49225CFC61A003A53FF /* jet.cpp */,
@@ -236,6 +255,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 				Base,
 			);
 			mainGroup = F0B9554025CE2ED7008ECEE9;
@@ -256,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0B9555425CE2EDB008ECEE9 /* Preview Assets.xcassets in Resources */,
+				F0CEB8DA25D141E600B2F27A /* Localizable.strings in Resources */,
 				F0B9555125CE2EDB008ECEE9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,11 +302,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F02CF4B225D01917003A53FF /* smmodel.mlmodel in Sources */,
+				F0CEB8A925D1143900B2F27A /* classificationView.swift in Sources */,
+				F0CEB8AE25D11E3E00B2F27A /* clickButton.swift in Sources */,
+				F0CEB8B325D12C8600B2F27A /* InactiveSession.swift in Sources */,
 				F02CF48825CF7F07003A53FF /* lltfunc.cpp in Sources */,
 				F0B9554F25CE2ED8008ECEE9 /* ContentView.swift in Sources */,
 				F0B955A025CE3765008ECEE9 /* AudioRecorder.swift in Sources */,
+				F0CEB8A425D1130100B2F27A /* spectrogramPreview.swift in Sources */,
 				F0B9554D25CE2ED8008ECEE9 /* CoreOrateApp.swift in Sources */,
+				F0CEB8D125D13F1900B2F27A /* smmodel.mlmodel in Sources */,
+				F0CEB8B825D1301F00B2F27A /* BufferingView.swift in Sources */,
 				F02CF49325CFC61A003A53FF /* jet.cpp in Sources */,
 				F02CF47B25CEE38F003A53FF /* utils.swift in Sources */,
 			);
@@ -321,6 +347,18 @@
 			targetProxy = F0B9556625CE2EDB008ECEE9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F0CEB8DC25D141E600B2F27A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F0CEB8DB25D141E600B2F27A /* en */,
+				F0CEB8E025D141ED00B2F27A /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F0B9556C25CE2EDB008ECEE9 /* Debug */ = {

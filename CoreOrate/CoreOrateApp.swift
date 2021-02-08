@@ -9,7 +9,7 @@ import SwiftUI
 @main
 struct CoreOrateApp: App {
     var body: some Scene {
-        let mainAnalysisEngine=AnalysisEngine()
+        let mainAnalysisEngine=AnalysisEngine(isPreview: false)
         WindowGroup {
             ContentView(analysisEngine: mainAnalysisEngine)
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification), perform: { _ in

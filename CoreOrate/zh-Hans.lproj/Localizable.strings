@@ -1,0 +1,50 @@
+/* No comment provided by engineer. */
+"About CoreOrate" = "关于CoreOrate";
+
+/* No comment provided by engineer. */
+"AboutCoreOrateDescription" = "CoreOrate会在您的设备上实时执行Orate的语音情感识别系统，使用麦克风来识别出您的情感是愤怒，快乐，淡然，还是伤心。请注意，CoreOrate不是一个产品，仅是一个技术展示和概念的验证。";
+
+/* No comment provided by engineer. */
+"Buffering..." = "正在缓冲...";
+
+/* No comment provided by engineer. */
+"Classification" = "情感分类";
+
+/* Error */
+"Nothing recognized." = "无";
+
+/* Name probably won't be localized */
+"CoreOrate" = "CoreOrate";
+
+/* No comment provided by engineer. */
+"Press start" = "请按开始";
+
+/* No comment provided by engineer. */
+"Preview" = "预览";
+
+/* No comment provided by engineer. */
+"Session Inactive" = "系统就绪";
+
+/* Start recording */
+"Start" = "开始";
+
+/* Stop recording */
+"Stop" = "停止";
+
+/* No comment provided by engineer. */
+"This should only take a moment" = "请稍等片刻";
+
+/* Error */
+"Unable to classify image." = "分类出错";
+
+/* Class emotion */
+"Angry" = "愤怒";
+
+/* Class emotion */
+"Happy" = "快乐";
+
+/* Class emotion */
+"Neutral" = "淡然";
+
+/* Class emotion */
+"Sad" = "伤心";
