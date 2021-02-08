@@ -9,8 +9,14 @@ import SwiftUI
 @main
 struct CoreOrateApp: App {
     var body: some Scene {
+        let mainAnalysisEngine=AnalysisEngine()
         WindowGroup {
-            ContentView(audioRecorder: AudioRecorder())
+            ContentView(analysisEngine: mainAnalysisEngine)
+                .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification), perform: { _ in
+                    if mainAnalysisEngine.recordingActive {
+                        mainAnalysisEngine.stopRecording()
+                    }
+                })
         }
     }
 }

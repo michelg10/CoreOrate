@@ -3,8 +3,10 @@ import SwiftUI
 import Combine
 import AVFoundation
 import Accelerate
+import CoreML
+import Vision
 
-class AudioRecorder: ObservableObject {
+class AnalysisEngine: ObservableObject {
     //MARK: Parameters
     let sampleRate=16000
     let chunkLen=1.0
@@ -34,14 +36,60 @@ class AudioRecorder: ObservableObject {
     
     var fftSetup:FFTSetup
     
+    var mlmodel:VNCoreMLModel
+    
     //MARK: Generate this
     var frame:UnsafeMutablePointer<Float>
     var hammingWindow:UnsafeMutablePointer<Float>
     var scale:Float
+    @Published var recordingActive=false
     @Published var outSpec:Image?=nil
     @Published var alive:Int = -1
+    @Published var classificationReturn=""
         
+    lazy var classificationRequest: VNCoreMLRequest = {
+        do {
+            /*
+             Use the Swift class `MobileNet` Core ML generates from the model.
+             To use a different Core ML classifier model, add it to the project
+             and replace `MobileNet` with that model's generated Swift class.
+             */
+            
+            let request = VNCoreMLRequest(model: mlmodel, completionHandler: { [weak self] request, error in
+                self?.processClassifications(for: request, error: error)
+            })
+            request.imageCropAndScaleOption = .centerCrop
+            return request
+        } catch {
+            fatalError("Failed to load Vision ML model: \(error)")
+        }
+    }()
+    
+    func processClassifications(for request: VNRequest, error: Error?) {
+        DispatchQueue.main.async {
+            guard let results = request.results else {
+                self.classificationReturn = "Unable to classify image."
+                return
+            }
+            // The `results` will always be `VNClassificationObservation`s, as specified by the Core ML model in this project.
+            let classifications = results as! [VNClassificationObservation]
+        
+            if classifications.isEmpty {
+                self.classificationReturn = "Nothing recognized."
+            } else {
+                // Display top classifications ranked by confidence in the UI.
+                let topClassifications = classifications.prefix(2)
+                let descriptions = topClassifications.map { classification in
+                    // Formats the classification for display; e.g. "(0.37) cliff, drop, drop-off".
+                   return String(format: "  (%.2f) %@", classification.confidence, classification.identifier)
+                }
+                self.classificationReturn = "Classification:\n" + descriptions.joined(separator: "\n")
+            }
+        }
+    }
+    
     init() {
+        try! mlmodel=VNCoreMLModel(for: smmodel().model)
         
         dftWindowSample=Int(dftWindow*Double(sampleRate))
         interpolationSample=next2Pow(x:4*dftWindowSample) //interpolate!
@@ -64,11 +112,9 @@ class AudioRecorder: ObservableObject {
         frame.initialize(to: 0)
         hammingWindow=UnsafeMutablePointer<Float>.allocate(capacity: dftWindowSample)
         hammingWindow.initialize(to: 0)
-        doInit(dftWindowSample,sampleRate,hammingWindow,&scale)
-    }
         
-    var audioEngine:AVAudioEngine=AVAudioEngine()
-    func startRecording() {
+        doInit(dftWindowSample,sampleRate,hammingWindow,&scale)
+        
         audioEngine=AVAudioEngine()
         
         let inputNode=audioEngine.inputNode
@@ -112,7 +158,7 @@ class AudioRecorder: ObservableObject {
             if (curBufSize==bufSize) {
                 var img:UnsafeMutablePointer<UInt8>
                 let audioBufPtr:UnsafeMutablePointer<UnsafeMutablePointer<Float>?>=UnsafeMutablePointer(mutating:audioBufs)
-                img=specGen(curBufStart,bufSize,strideSample,audioBufPtr,dftWindowSample,frameIncSample,coefsNum,chunkSample, interpolationSample,frame,hammingWindow, fftSetup, scale, resizeX,resizeY, -144, -60)
+                img=specGen(curBufStart,bufSize,strideSample,audioBufPtr,dftWindowSample,frameIncSample,coefsNum,chunkSample, interpolationSample,frame,hammingWindow, fftSetup, scale, resizeX,resizeY, -144, -50)
 
                 let colorspace = CGColorSpaceCreateDeviceRGB();
                 let rgbData = CFDataCreate(nil, img, 256 * 256 * 3);
@@ -124,15 +170,41 @@ class AudioRecorder: ObservableObject {
                     alive=alive+1
                 }
                 let perfEnd = DispatchTime.now()
-                print("Epoch completed in \(Double(perfEnd.uptimeNanoseconds-perfStart.uptimeNanoseconds)/1000000.0) ms")
+                
                 //Perform inference
+                DispatchQueue.global(qos: .userInitiated).async {
+                    let infStart = DispatchTime.now()
+                    let handler = VNImageRequestHandler(ciImage: CIImage(cgImage: cgimg!), orientation: .up)
+                    do {
+                        try handler.perform([self.classificationRequest])
+                    } catch {
+                        /*
+                         This handler catches general image processing errors. The `classificationRequest`'s
+                         completion handler `processClassifications(_:error:)` catches errors specific
+                         to processing that request.
+                         */
+                        print("Inference failure.\n\(error.localizedDescription)")
+                    }
+                    let infEnd = DispatchTime.now()
+                    print("Inference completed in \(Double(infEnd.uptimeNanoseconds-infStart.uptimeNanoseconds)/1000000.0) ms")
+                }
+                print("Preprocessing completed in \(Double(perfEnd.uptimeNanoseconds-perfStart.uptimeNanoseconds)/1000000.0) ms")
             }
-            
             if self.curActive != myNum {
                 print("System overload!")
                 assert(0 != 0)
             }
         }
+    }
+        
+    var audioEngine:AVAudioEngine=AVAudioEngine()
+    func stopRecording() {
+        audioEngine.stop()
+        recordingActive=false
+    }
+    func startRecording() {
+        curBufStart=0
+        curBufSize=0
         audioEngine.prepare()
         do {
             try audioEngine.start()
@@ -141,5 +213,6 @@ class AudioRecorder: ObservableObject {
             
         }
         print("done")
+        recordingActive=true
     }
 }
