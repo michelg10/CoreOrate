@@ -10,6 +10,7 @@
 		F02CF47B25CEE38F003A53FF /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02CF47A25CEE38F003A53FF /* utils.swift */; };
 		F02CF48825CF7F07003A53FF /* lltfunc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F02CF48625CF7F07003A53FF /* lltfunc.cpp */; };
 		F02CF49325CFC61A003A53FF /* jet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F02CF49225CFC61A003A53FF /* jet.cpp */; };
+		F03DFB3A25D229330040FE99 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F03DFB3925D229320040FE99 /* LICENSE */; };
 		F0B9554D25CE2ED8008ECEE9 /* CoreOrateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9554C25CE2ED8008ECEE9 /* CoreOrateApp.swift */; };
 		F0B9554F25CE2ED8008ECEE9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B9554E25CE2ED8008ECEE9 /* ContentView.swift */; };
 		F0B9555125CE2EDB008ECEE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0B9555025CE2EDB008ECEE9 /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 		F02CF48625CF7F07003A53FF /* lltfunc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lltfunc.cpp; sourceTree = "<group>"; };
 		F02CF48725CF7F07003A53FF /* lltfunc.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = lltfunc.hpp; sourceTree = "<group>"; };
 		F02CF49225CFC61A003A53FF /* jet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jet.cpp; sourceTree = "<group>"; };
+		F03DFB3925D229320040FE99 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F0B9554925CE2ED8008ECEE9 /* CoreOrate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreOrate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0B9554C25CE2ED8008ECEE9 /* CoreOrateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreOrateApp.swift; sourceTree = "<group>"; };
 		F0B9554E25CE2ED8008ECEE9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		F0B9554025CE2ED7008ECEE9 = {
 			isa = PBXGroup;
 			children = (
+				F03DFB3925D229320040FE99 /* LICENSE */,
 				F0B9554B25CE2ED8008ECEE9 /* CoreOrate */,
 				F0B9555D25CE2EDB008ECEE9 /* CoreOrateTests */,
 				F0B9556825CE2EDB008ECEE9 /* CoreOrateUITests */,
@@ -277,6 +280,7 @@
 			files = (
 				F0B9555425CE2EDB008ECEE9 /* Preview Assets.xcassets in Resources */,
 				F0CEB8DA25D141E600B2F27A /* Localizable.strings in Resources */,
+				F03DFB3A25D229330040FE99 /* LICENSE in Resources */,
 				F0B9555125CE2EDB008ECEE9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
