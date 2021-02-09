@@ -23,7 +23,6 @@
 		F0CEB8AE25D11E3E00B2F27A /* clickButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CEB8AD25D11E3E00B2F27A /* clickButton.swift */; };
 		F0CEB8B325D12C8600B2F27A /* InactiveSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CEB8B225D12C8600B2F27A /* InactiveSession.swift */; };
 		F0CEB8B825D1301F00B2F27A /* BufferingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CEB8B725D1301F00B2F27A /* BufferingView.swift */; };
-		F0CEB8D125D13F1900B2F27A /* smmodel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F0CEB8D025D13F1900B2F27A /* smmodel.mlmodel */; };
 		F0CEB8DA25D141E600B2F27A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F0CEB8DC25D141E600B2F27A /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -70,7 +69,6 @@
 		F0CEB8AD25D11E3E00B2F27A /* clickButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clickButton.swift; sourceTree = "<group>"; };
 		F0CEB8B225D12C8600B2F27A /* InactiveSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InactiveSession.swift; sourceTree = "<group>"; };
 		F0CEB8B725D1301F00B2F27A /* BufferingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferingView.swift; sourceTree = "<group>"; };
-		F0CEB8D025D13F1900B2F27A /* smmodel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = smmodel.mlmodel; sourceTree = "<group>"; };
 		F0CEB8DB25D141E600B2F27A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F0CEB8E025D141ED00B2F27A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				F0B955FC25CE5686008ECEE9 /* CoreOrate.entitlements */,
-				F0CEB8D025D13F1900B2F27A /* smmodel.mlmodel */,
 				F0B9554C25CE2ED8008ECEE9 /* CoreOrateApp.swift */,
 				F0B9554E25CE2ED8008ECEE9 /* ContentView.swift */,
 				F0CEB8DC25D141E600B2F27A /* Localizable.strings */,
@@ -314,7 +311,6 @@
 				F0B955A025CE3765008ECEE9 /* AudioRecorder.swift in Sources */,
 				F0CEB8A425D1130100B2F27A /* spectrogramPreview.swift in Sources */,
 				F0B9554D25CE2ED8008ECEE9 /* CoreOrateApp.swift in Sources */,
-				F0CEB8D125D13F1900B2F27A /* smmodel.mlmodel in Sources */,
 				F0CEB8B825D1301F00B2F27A /* BufferingView.swift in Sources */,
 				F02CF49325CFC61A003A53FF /* jet.cpp in Sources */,
 				F02CF47B25CEE38F003A53FF /* utils.swift in Sources */,
